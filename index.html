@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project - Task Management</title>
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div>
-        <button id = 'submit' onclick="taskAdd()">Submit</button>
+    <h1 id="'bllop">Task Management</h1>
+    <p></p>
+    <p>What is your task?</p>
+    <input type="text" id="taskText">
+    <button type="submit">Submit</button>
+    <p></p>
+
+    <p>What level of priority?</p>
+    <input type="text" id="taskType">
+    <button type="submit">Submit</button>
+    <p></p>
+    <p>Is it important?</p>
+    <input type="checkbox" id="isImportant">
+    <button type="submit">Submit</button>
+    <p></p>
+    <button id = 'submit' onclick="taskAdd()">Add Task</button> 
+    <div id = "taskList">
     </div>
 </body>
 </html>

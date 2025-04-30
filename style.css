@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+    margin-top: 10%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+    font-weight: bolder;
+    font-style:italic;
+}
+
+.newTask {
+    border: 10px;
+    border-color: gray;
+}
