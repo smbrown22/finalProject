@@ -3,6 +3,7 @@
 // defines the 
 let btn = document.getElementById('submit')
 let taskList = document.getElementById('taskList')
+let taskLog = []
 
 let taskText = document.getElementById('taskText')
 let taskType = document.getElementById('taskType')
@@ -21,7 +22,9 @@ class Task {
 
 function taskAdd() {
     // creates task for user by taking inputs 
-    let x = new Task(taskText.value , taskType.value , isItImportant.value)
+    var x = new Task(taskText.value , taskType.value , isItImportant.value)
+    // taskLog = taskLog.push(JSON.stringify(x))
+    // console.log(taskLog)
     
     // creates where the output will be displayed 
     var newTask = document.createElement('p')
@@ -34,7 +37,7 @@ function taskAdd() {
     doneBox.setAttribute('id' , 'doneBox')
     
     // makes obj string to be outputted 
-    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}`
+    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}` + " ---------------- " +'Date Added: '
     console.log(JSON.stringify(x))
 
     // Clarification on what button does 
@@ -73,4 +76,6 @@ function taskDelete() {
     taskList.removeChild(newTask)
     taskList.removeChild(doneBox)
     taskList.removeChild(deleteButton)
+    // console.log("Deleted Task: " , taskLog)
 }
+
