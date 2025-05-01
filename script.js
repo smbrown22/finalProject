@@ -1,9 +1,12 @@
 "use strict";
 
-// defines the 
+// defines the elements that will be used 
 let btn = document.getElementById('submit')
 let taskList = document.getElementById('taskList')
 let taskLog = []
+let completedTasks = document.getElementById('completedTasks')
+
+console.log(Date())
 
 let taskText = document.getElementById('taskText')
 let taskType = document.getElementById('taskType')
@@ -22,14 +25,18 @@ class Task {
 
 function taskAdd() {
     // creates task for user by taking inputs 
-    var x = new Task(taskText.value , taskType.value , isItImportant.value)
-    // taskLog = taskLog.push(JSON.stringify(x))
-    // console.log(taskLog)
+    var x = new Task(taskText.value , "placehold" , isItImportant.value)
+    var y = JSON.stringify(x)
+    taskLog.push(y)
+    console.log(taskLog)
+
+    console.log(taskType.value)
     
     // creates where the output will be displayed 
     var newTask = document.createElement('p')
     var deleteButton = document.createElement('button')
-    var doneBox = document.createElement('input') 
+    var doneBox = document.createElement('input')
+    let date = Date() 
 
     // sets the IDS of the output displays 
     newTask.setAttribute('id' , 'newTask')
@@ -37,8 +44,8 @@ function taskAdd() {
     doneBox.setAttribute('id' , 'doneBox')
     
     // makes obj string to be outputted 
-    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}` + " ---------------- " +'Date Added: '
-    console.log(JSON.stringify(x))
+    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}` + " ---------------- " +'Date Added: ' + `'${date}'`
+    // console.log(JSON.stringify(x))
 
     // Clarification on what button does 
     deleteButton.textContent = "Delete"
@@ -46,19 +53,21 @@ function taskAdd() {
 
     // Defines the type of the deleteButton, and adds an onclick attribute to the button that allows taskDelete to work. 
     deleteButton.setAttribute('type' , 'submit')
-    deleteButton.setAttribute('onclick' , 'taskDelete()')
+    deleteButton.setAttribute('onclick' , 'taskDelete(newTask=document.getElementById("newTask"), doneBox=document.getElementById("doneBox"), deleteButton=document.getElementById("deleteButton"))')
     
     // Defines the type of doneBox, and adds an onclick attribute to the box that allows taskDone to work. 
     doneBox.setAttribute('type' , 'checkbox')
+    doneBox.setAttribute('onclick' , 'taskDone()')
 
     // if isImportant is checked: color will be red; else; color will be black 
-    console.log(isItImportant.value)
-    if (x.isImportant == 'on') {
-        console.log("true")
+    //console.log(isItImportant.value)
+    //console.log(isItImportant.checked)
+    if (isItImportant.checked == true) {
+        console.log("last true")
         newTask.setAttribute('style' , 'color:red')
     }
     else {
-        console.log(false)
+        console.log("last false")
         newTask.setAttribute('style' , 'color:black')
     }
 
@@ -66,16 +75,26 @@ function taskAdd() {
     taskList.appendChild(newTask)
     taskList.appendChild(doneBox)
     taskList.appendChild(deleteButton)
+
+
+
+    console.log("Added item: Current log")
+    console.log(taskLog)
 }
 
 function taskDelete() {
-    // deletes the corresponding task AFTER the press of the deleteButton  
-    let newTask = document.getElementById('newTask')
-    let deleteButton = document.getElementById('deleteButton')
-    let doneBox = document.getElementById('doneBox')
+    // deletes the task AFTER the press of the deleteButton  
+
     taskList.removeChild(newTask)
     taskList.removeChild(doneBox)
     taskList.removeChild(deleteButton)
-    // console.log("Deleted Task: " , taskLog)
+    
+
+}
+
+function taskDone() {
+    let strike = document.createElement('s')
+    strike.textContent = newTask.textContent
+    completedTasks.appendChild(strike)
 }
 

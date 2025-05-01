@@ -12,19 +12,27 @@
     <p></p>
     <p>What is your task?</p>
     <input type="text" id="taskText">
-    <button type="submit">Submit</button>
     <p></p>
 
     <p>What level of priority?</p>
-    <input type="text" id="taskType">
-    <button type="submit">Submit</button>
-    <p></p>
+    
+    <select id="taskType">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+    
     <p>Is it important?</p>
+    <p></p>
+    
+    <p></p>
     <input type="checkbox" id="isImportant">
-    <button type="submit">Submit</button>
     <p></p>
     <button id = 'submit' onclick="taskAdd()">Add Task</button> 
     <div id = "taskList">
+    </div>
+    <div id = 'completedTasks'>
+        <p>Completed Tasks: </p>
     </div>
 </body>
 </html>
