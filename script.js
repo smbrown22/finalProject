@@ -5,12 +5,16 @@ let btn = document.getElementById('submit')
 let taskList = document.getElementById('taskList')
 let taskLog = []
 let completedTasks = document.getElementById('completedTasks')
+let whiteSpace = document.createElement('p') 
+let done = document.createElement('p')
+done.textContent = 'Finished Task?'
 
 console.log(Date())
 
 let taskText = document.getElementById('taskText')
 let taskType = document.getElementById('taskType')
 let isItImportant = document.getElementById('isImportant')
+
 
 // Constructs the class 'Task', which will be where objects are underneath  
 
@@ -25,7 +29,7 @@ class Task {
 
 function taskAdd() {
     // creates task for user by taking inputs 
-    var x = new Task(taskText.value , "placehold" , isItImportant.value)
+    var x = new Task(taskText.value , taskType.value , isItImportant.checked)
     var y = JSON.stringify(x)
     taskLog.push(y)
     console.log(taskLog)
@@ -42,9 +46,10 @@ function taskAdd() {
     newTask.setAttribute('id' , 'newTask')
     deleteButton.setAttribute('id' , 'deleteButton')
     doneBox.setAttribute('id' , 'doneBox')
+    doneBox.setAttribute('label', "Done")
     
     // makes obj string to be outputted 
-    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}` + " ---------------- " +'Date Added: ' + `'${date}'`
+    newTask.textContent = 'Task: ' +" " + `${taskText.value}` + " ---------------- " + 'Priority: ' + " " + `${taskType.value}` + " ---------------- " +'Date Added: ' + `'${date}'` 
     // console.log(JSON.stringify(x))
 
     // Clarification on what button does 
@@ -63,17 +68,17 @@ function taskAdd() {
     //console.log(isItImportant.value)
     //console.log(isItImportant.checked)
     if (isItImportant.checked == true) {
-        console.log("last true")
-        newTask.setAttribute('style' , 'color:red')
+        newTask.setAttribute('style' , 'background-color:red')
     }
     else {
-        console.log("last false")
         newTask.setAttribute('style' , 'color:black')
     }
 
     // adds the output to the div
     taskList.appendChild(newTask)
+    taskList.appendChild(done)
     taskList.appendChild(doneBox)
+    taskList.appendChild(whiteSpace) 
     taskList.appendChild(deleteButton)
 
 
@@ -88,13 +93,25 @@ function taskDelete() {
     taskList.removeChild(newTask)
     taskList.removeChild(doneBox)
     taskList.removeChild(deleteButton)
+
+    taskLog.pop()
+
+    console.log("Deleted Item: ")
+    console.log(taskLog)
     
 
 }
 
 function taskDone() {
+
+    // Prevents the done box from being unclicked and still being added to TaskDone repeatedly 
+    if (doneBox.checked == true) {
     let strike = document.createElement('s')
     strike.textContent = newTask.textContent
     completedTasks.appendChild(strike)
+    completedTasks.appendChild(whiteSpace)
+    }
+    else {
+        console.log("Doing nothing")
+    }
 }
-
